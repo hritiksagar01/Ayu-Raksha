@@ -23,9 +23,32 @@ export default function App() {
     const [currentPage, setCurrentPage] = useState('/');
     const [loggedInUser, setLoggedInUser] = useState(null);
 
+    // New state for OS and screen size
+    const [osType, setOsType] = useState('unknown');
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+
     useEffect(() => {
+        // Detect OS type
+        const userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
+        if (/android/i.test(userAgent)) {
+            setOsType('android');
+        } else if (/windows/i.test(userAgent)) {
+            setOsType('windows');
+        } else {
+            setOsType('other');
+        }
+
+        // Handle screen resize
+        const handleResize = () => {
+            setScreenSize(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+
         const timer = setTimeout(() => setInitialLoading(false), 2000);
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const handleLanguageChange = (langKey) => setSelectedLanguage(langKey);
@@ -89,27 +112,83 @@ export default function App() {
     const renderPage = () => {
         if (loggedInUser) {
             if (loggedInUser.type === 'patient') {
-                return <PatientLayout onNavigate={handleNavigation} currentPage={currentPage} translations={translations} selectedLanguage={selectedLanguage} />;
+                return <PatientLayout
+                    onNavigate={handleNavigation}
+                    currentPage={currentPage}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
             }
             if (loggedInUser.type === 'doctor') {
-                return <DoctorLayout 
-                onNavigate={handleNavigation} 
-                onPatientSearch={handlePatientSearch}
-                onAuthorize={handleAuthorize} 
-                onGeneratePrescription={handleGeneratePrescription} 
-                currentPage={currentPage} translations={translations} selectedLanguage={selectedLanguage} user={loggedInUser} />;
+                return <DoctorLayout
+                    onNavigate={handleNavigation}
+                    onPatientSearch={handlePatientSearch}
+                    onAuthorize={handleAuthorize}
+                    onGeneratePrescription={handleGeneratePrescription}
+                    currentPage={currentPage}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    user={loggedInUser}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
             }
             if (loggedInUser.type === 'uploader') {
-                return <UploaderLayout onNavigate={handleNavigation} currentPage={currentPage} translations={translations} selectedLanguage={selectedLanguage} user={loggedInUser} />;
+                return <UploaderLayout
+                    onNavigate={handleNavigation}
+                    currentPage={currentPage}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    user={loggedInUser}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
             }
         }
 
         switch (currentPage) {
-            case '/': return <EntryPage onNavigate={setCurrentPage} translations={translations} selectedLanguage={selectedLanguage} />;
-            case '/uploader-login': return <UploaderLoginPage onLoginSuccess={() => handleLoginSuccess('uploader')} translations={translations} selectedLanguage={selectedLanguage} />;
-            case '/patient-login': return <PatientLoginPage onLoginSuccess={() => handleLoginSuccess('patient')} translations={translations} selectedLanguage={selectedLanguage} />;
-            case '/doctor-login': return <DoctorLoginPage onLoginSuccess={() => handleLoginSuccess('doctor')} translations={translations} selectedLanguage={selectedLanguage} />;
-            default: return <EntryPage onNavigate={setCurrentPage} translations={translations} selectedLanguage={selectedLanguage} />;
+            case '/':
+                return <EntryPage
+                    onNavigate={setCurrentPage}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
+            case '/uploader-login':
+                return <UploaderLoginPage
+                    onLoginSuccess={() => handleLoginSuccess('uploader')}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
+            case '/patient-login':
+                return <PatientLoginPage
+                    onLoginSuccess={() => handleLoginSuccess('patient')}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
+            case '/doctor-login':
+                return <DoctorLoginPage
+                    onLoginSuccess={() => handleLoginSuccess('doctor')}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
+            default:
+                return <EntryPage
+                    onNavigate={setCurrentPage}
+                    translations={translations}
+                    selectedLanguage={selectedLanguage}
+                    osType={osType}
+                    screenSize={screenSize}
+                />;
         }
     };
 
@@ -118,7 +197,7 @@ export default function App() {
     if (currentPage.includes('/doctor/patients/')) loadingText = translations.authorizingText[selectedLanguage];
 
     return (
-        <div className="bg-gray-100 min-h-screen font-sans flex flex-col">
+        <div className="bg-gray-100 h-screen font-sans flex flex-col">
             {initialLoading && <LoadingSpinner isOverlay={true} text={translations.loadingText[selectedLanguage]} />}
             {isProcessing && <LoadingSpinner isOverlay={true} text={loadingText} />}
 

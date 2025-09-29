@@ -5,8 +5,8 @@ import UploadIcon from '../../components/icons/UploadIcon';
 
 const EntryPage = ({ onNavigate, translations, selectedLanguage }) => {
     return (
-        <div className="flex items-center justify-center min-h-full py-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full max-w-2xl p-8 space-y-8 bg-white rounded-xl shadow-lg text-center">
+ <div className="w-full min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-10">
+  <div className="w-full max-w-full sm:max-w-md md:max-w-lg lg:max-w-3xl xl:max-w-5xl p-8 space-y-8 bg-white rounded-xl shadow-lg text-center">
                 <div className="mb-6"><img src="https://placehold.co/600x300/14b8a6/FFFFFF?text=Ayu-Raksha+Health" alt="Integrated Health" className="rounded-lg mx-auto" /></div>
                 <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">{translations.entryTitle[selectedLanguage]}</h1>
                 <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">{translations.entrySlogan[selectedLanguage]}</p>

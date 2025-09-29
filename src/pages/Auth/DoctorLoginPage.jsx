@@ -35,7 +35,7 @@ const DoctorLoginPage = ({ onLoginSuccess, translations, selectedLanguage }) => 
         }
     };
         return (
-        <div className="flex items-center justify-center min-h-full py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center h-full bg-white py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg">
                 <div><h2 className="text-center text-3xl font-extrabold text-gray-900">{translations.doctorLoginTitle[selectedLanguage]}</h2></div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
