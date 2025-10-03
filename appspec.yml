@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: dist
+    destination: /var/www/html
+
+hooks:
+  AfterInstall:
+    - location: scripts/copy_dist.sh
+      timeout: 300
+      runas: ubuntu
+    - location: scripts/restart.sh
+      timeout: 60
+      runas: ubuntu
