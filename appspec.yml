@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: dist
+  - source: /
     destination: /var/www/html
 
 hooks:
@@ -11,4 +11,7 @@ hooks:
       runas: ubuntu
     - location: scripts/restart.sh
       timeout: 60
+      runas: ubuntu
+    - location: scripts/chmod_scripts.sh
+      timeout: 30
       runas: ubuntu
