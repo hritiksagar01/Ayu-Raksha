@@ -1,0 +1,3 @@
+- [x] Create nginx.conf for SPA routing
+- [x] Modify scripts/copy_dist.sh to deploy nginx config
+- [ ] Modify scripts/restart.sh to reload nginx
