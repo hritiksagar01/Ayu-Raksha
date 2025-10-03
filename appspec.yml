@@ -1,17 +1,17 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: dist
     destination: /var/www/html
 
 hooks:
   AfterInstall:
+    - location: scripts/chmod_scripts.sh
+      timeout: 30
+      runas: ubuntu
     - location: scripts/copy_dist.sh
       timeout: 300
       runas: ubuntu
     - location: scripts/restart.sh
       timeout: 60
-      runas: ubuntu
-    - location: scripts/chmod_scripts.sh
-      timeout: 30
       runas: ubuntu
