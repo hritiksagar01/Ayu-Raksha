@@ -59,7 +59,7 @@ export default function App() {
         setIsProcessing(true);
 
         if (userType === 'patient') {
-            user = { name: 'Krishna Kumar', type: 'patient' };
+            user = { name: 'Hritik Sagar Srivastava', type: 'patient' };
             landingPage = '/patient/dashboard';
         } else if (userType === 'doctor') {
             user = { name: 'Anil Verma', type: 'doctor' };
