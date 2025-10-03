@@ -9,10 +9,11 @@ phases:
       - npm install --legacy-peer-deps
   build:
     commands:
-      - echo Building React app...
+      - echo Building React app with Vite...
       - npm run build
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: .
+    - 'dist/**/*'
+    - 'appspec.yml'
+  discard-paths: no
