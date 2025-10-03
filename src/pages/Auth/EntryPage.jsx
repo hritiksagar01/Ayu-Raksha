@@ -15,7 +15,7 @@ const EntryPage = ({ onNavigate, translations, selectedLanguage }) => {
                     <button onClick={() => onNavigate('/doctor-login')} className="w-full flex items-center justify-center py-4 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-transform transform hover:scale-105"><BriefcaseIcon className="h-6 w-6 mr-2" />{translations.entryDoctorButton[selectedLanguage]}</button>
                     <button onClick={() => onNavigate('/uploader-login')} className="w-full flex items-center justify-center py-4 px-4 border border-gray-300 text-lg font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-transform transform hover:scale-105"><UploadIcon className="h-6 w-6 mr-2" />{translations.entryUploaderButton[selectedLanguage]}</button>
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-200"><a href="#" className="font-medium text-teal-600 hover:text-teal-500 mx-4">{translations.abxfvdsfsdfsdfdsfdsoutUsLink[selectedLanguage]}</a><a href="#" className="font-medium text-teal-600 hover:text-teal-500 mx-4">{translations.contactUsLink[selectedLanguage]}</a></div>
+                <div className="mt-8 pt-6 border-t border-gray-200"><a href="#" className="font-medium text-teal-600 hover:text-teal-500 mx-4">{translations.aboutUsLink[selectedLanguage]}</a><a href="#" className="font-medium text-teal-600 hover:text-teal-500 mx-4">{translations.contactUsLink[selectedLanguage]}</a></div>
             </div>
         </div>
     );
